@@ -35,7 +35,7 @@ namespace BookSmart
         {
             // If quest labels are enabled, create the Quest Book cache first
             List<String> questBookCache = new();
-            if (settings.addQuestLabels) { questBookCache = CreateQuestBookCache(state); }
+            if (settings.ajouterTagQuetes) { questBookCache = CreateQuestBookCache(state); }
             
             // Iterate all winning books from the load order
             foreach (var book in state.LoadOrder.PriorityOrder.OnlyEnabled().Book().WinningOverrides())
@@ -47,21 +47,21 @@ namespace BookSmart
                 List<String> newTags = new();
 
                 // Add Skill labels
-                if (settings.addSkillLabels && book.Teaches is IBookSkillGetter skillTeach)
+                if (settings.ajouterTagCompetences && book.Teaches is IBookSkillGetter skillTeach)
                 {
                     var skillLabel = GetSkillLabelName(book);
                     if (skillLabel is not null) { newTags.Add(skillLabel); }
                 }
 
                 //Add Map Marker labels
-                if (settings.addMapMarkerLabels && (book.VirtualMachineAdapter is not null && book.VirtualMachineAdapter.Scripts.Count > 0)                    )
+                if (settings.ajouterTagMarqueurDeCarte && (book.VirtualMachineAdapter is not null && book.VirtualMachineAdapter.Scripts.Count > 0)                    )
                 {
                     var mapMarkerLabel = GetMapLabelName(book);
                     if (mapMarkerLabel is not null) { newTags.Add(mapMarkerLabel); }
                 }
 
                 // Add Quest labels
-                if (settings.addQuestLabels)
+                if (settings.ajouterTagQuetes)
                 {
                     var questLabel = GetQuestLabelName(book, questBookCache);
                     if (questLabel is not null) { newTags.Add(questLabel); }
@@ -75,8 +75,16 @@ namespace BookSmart
                 var bookOverride = state.PatchMod.Books.GetOrAddAsOverride(book);
 		    
 		string i18nBookName = "";
+                string i18nBookDescription = null;
+                string i18nBookText = null;
+
 		book.Name.TryLookup(Language.French, out i18nBookName);
+                book.Description?.TryLookup(Language.French, out i18nBookDescription);
+                book.BookText?.TryLookup(Language.French, out i18nBookText);
+
                 i18nBookName ??= book.Name.String;
+		i18nBookDescription ??= book.Description.String;
+		i18nBookText ??= book.BookText.String;
                 		    
                 // Special handling for a labelFormat of Star
                 if (settings.labelFormat == Settings.LabelFormat.Étoile)
@@ -91,6 +99,8 @@ namespace BookSmart
                 else
                 {
                     bookOverride.Name = GetLabel(i18nBookName!, Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes(String.Join("/", newTags))));
+		    bookOverride.Description = i18nBookDescription;
+		    bookOverride.BookText = i18nBookText;
                 }
 
                 // Console output
@@ -284,7 +294,7 @@ namespace BookSmart
                 foreach (var script in book.VirtualMachineAdapter.Scripts)
                 {
 			
-                    if (script.Name.Contains("Quest", StringComparison.OrdinalIgnoreCase) || settings.assumeBookScriptsAreQuests)
+                    if (script.Name.Contains("Quest", StringComparison.OrdinalIgnoreCase) || settings.lesLivresAvecSriptsSontDesLivresDeQuetes)
                     {
                         Console.WriteLine($"{book.FormKey}: '{book.Name}' a un script de quête appelé '{script.Name}'.");
                         isBookQuestRealted = true;
