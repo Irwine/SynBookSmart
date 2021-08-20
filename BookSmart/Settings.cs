@@ -7,19 +7,24 @@ namespace BookSmart
         // Which labels to add
         [SynthesisOrder]
         [SynthesisTooltip("Ajoutez le tag de compétence au nom du livre si le livre enseigne une compétence.")]
-        public bool addSkillLabels = true;
+        //public bool addSkillLabels = true;
+        public bool ajouterTagCompetences = true;
         
         [SynthesisOrder]
         [SynthesisTooltip("Ajoutez le tag marqueur de carte au nom du livre si le livre enseigne des marqueurs de carte.")]
-        public bool addMapMarkerLabels = true;
+        //public bool addMapMarkerLabels = true;
+        public bool ajouterTagMarqueurDeCarte = true;
 
         [SynthesisOrder]
         [SynthesisTooltip("Ajoute le tag quête au nom du livre si celui-ci est utilisé dans une quête.")]
-        public bool addQuestLabels = true;
+        //public bool addQuestLabels = true;
+        public bool ajouterTagQuetes = true;
 
         [SynthesisOrder]
         [SynthesisTooltip("Part du principe que tout LIVRE avec lié à un script est un livre de quête. Peut marquer incorrectement certains livres. Améliorera la détection des livres de mods qui utilisent leurs propres scripts.")]
-        public bool assumeBookScriptsAreQuests = false;
+        //public bool assumeBookScriptsAreQuests = false;
+        public bool lesLivresAvecSriptsSontDesLivresDeQuetes = false;
+        
 
         // Label Position
         public enum LabelPosition
