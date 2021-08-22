@@ -98,7 +98,8 @@ namespace BookSmart
                 // All other labelFormats
                 else
                 {
-                    bookOverride.Name = GetLabel(i18nBookName!, Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes(String.Join("/", newTags))));
+                    //bookOverride.Name = GetLabel(i18nBookName!, Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes(String.Join("/", newTags))));
+		    bookOverride.Name = GetLabel(i18nBookName!, String.Join("/", newTags));
 		    bookOverride.Description = i18nBookDescription;
 		    bookOverride.BookText = i18nBookText;
                 }
