@@ -64,6 +64,6 @@ namespace BookSmart
         [SynthesisOrder]
         [SynthesisSettingName("Caractères d'encapsulation")]
         [SynthesisTooltip("Les caractères entourant le nom de la compétence.\r\nParenthèses: ()\r\nAccolades: {}\r\nCrochets: []\r\nChevrons: <>\r\nÉtoiles: *")]
-        public EncapsulatingCharacters encapsulatingCharacters { get; set; } = EncapsulatingCharacters.Parenthèses;
+        public EncapsulatingCharacters encapsulatingCharacters { get; set; } = EncapsulatingCharacters.Crochets;
     }
 }
