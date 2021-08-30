@@ -5,6 +5,7 @@ using Mutagen.Bethesda;
 using Mutagen.Bethesda.Synthesis;
 using Mutagen.Bethesda.Skyrim;
 using System.Text;
+using Mutagen.Bethesda.Strings;
 
 namespace BookSmart
 {
