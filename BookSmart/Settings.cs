@@ -21,7 +21,7 @@ namespace BookSmart
         public bool ajouterTagQuetes = true;
 
         [SynthesisOrder]
-        [SynthesisTooltip("Part du principe que tout LIVRE avec lié à un script est un livre de quête. Peut marquer incorrectement certains livres. Améliorera la détection des livres de mods qui utilisent leurs propres scripts.")]
+        [SynthesisTooltip("Part du principe que tout LIVRE lié à un script est un livre de quête. Peut marquer incorrectement certains livres. Améliorera la détection des livres de mods qui utilisent leurs propres scripts.")]
         //public bool assumeBookScriptsAreQuests = false;
         public bool lesLivresAvecSriptsSontDesLivresDeQuetes = false;
         
