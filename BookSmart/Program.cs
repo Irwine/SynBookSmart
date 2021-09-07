@@ -88,7 +88,7 @@ namespace BookSmart
 		i18nBookText ??= book.BookText.String;
                 		    
                 // Special handling for a labelFormat of Star
-                if (settings.labelFormat == Settings.LabelFormat.Étoile)
+                if (settings.labelFormat == Settings.LabelFormat.Étoiles)
                 {
                     switch (settings.labelPosition) {
                         case Settings.LabelPosition.Avant: { bookOverride.Name = $"*{i18nBookName}"; break; }
@@ -242,7 +242,7 @@ namespace BookSmart
                 };
             }
             // Label Format: Star
-            else if (settings.labelFormat == Settings.LabelFormat.Étoile)
+            else if (settings.labelFormat == Settings.LabelFormat.Étoiles)
             {
                 return "*";
             }
@@ -268,7 +268,7 @@ namespace BookSmart
                     {
                         Settings.LabelFormat.Long => "Marqueur carte",
                         Settings.LabelFormat.Court => "Marqueur",
-                        Settings.LabelFormat.Étoile => "*",
+                        Settings.LabelFormat.Étoiles => "*",
                         _ => throw new NotImplementedException("Vous avez défini un format de tag qui n'est pas supporté.")
                     };
                 }
@@ -309,7 +309,7 @@ namespace BookSmart
                 {
                     Settings.LabelFormat.Long => "Quête",
                     Settings.LabelFormat.Court => "Q",
-                    Settings.LabelFormat.Étoile => "*",
+                    Settings.LabelFormat.Étoiles => "*",
                     _ => throw new NotImplementedException("Vous avez défini un format de tag qui n'est pas supporté.")
                 };
             } else
