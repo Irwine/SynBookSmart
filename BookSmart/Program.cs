@@ -36,7 +36,7 @@ namespace BookSmart
         {
             // If quest labels are enabled, create the Quest Book cache first
             List<String> questBookCache = new();
-            if (settings.ajouterTagQuetes) { questBookCache = CreateQuestBookCache(state); }
+            if (settings.addQuestLabels) { questBookCache = CreateQuestBookCache(state); }
             
             // Iterate all winning books from the load order
             foreach (var book in state.LoadOrder.PriorityOrder.OnlyEnabled().Book().WinningOverrides())
@@ -48,21 +48,21 @@ namespace BookSmart
                 List<String> newTags = new();
 
                 // Add Skill labels
-                if (settings.ajouterTagCompetences && book.Teaches is IBookSkillGetter skillTeach)
+                if (settings.addSkillLabels && book.Teaches is IBookSkillGetter skillTeach)
                 {
                     var skillLabel = GetSkillLabelName(book);
                     if (skillLabel is not null) { newTags.Add(skillLabel); }
                 }
 
                 //Add Map Marker labels
-                if (settings.ajouterTagMarqueurDeCarte && (book.VirtualMachineAdapter is not null && book.VirtualMachineAdapter.Scripts.Count > 0)                    )
+                if (settings.addMapMarkerLabels && (book.VirtualMachineAdapter is not null && book.VirtualMachineAdapter.Scripts.Count > 0)                    )
                 {
                     var mapMarkerLabel = GetMapLabelName(book);
                     if (mapMarkerLabel is not null) { newTags.Add(mapMarkerLabel); }
                 }
 
                 // Add Quest labels
-                if (settings.ajouterTagQuetes)
+                if (settings.addQuestLabels)
                 {
                     var questLabel = GetQuestLabelName(book, questBookCache);
                     if (questLabel is not null) { newTags.Add(questLabel); }
@@ -295,7 +295,7 @@ namespace BookSmart
                 foreach (var script in book.VirtualMachineAdapter.Scripts)
                 {
 			
-                    if (script.Name.Contains("Quest", StringComparison.OrdinalIgnoreCase) || settings.lesLivresAvecSriptsSontDesLivresDeQuetes)
+                    if (script.Name.Contains("Quest", StringComparison.OrdinalIgnoreCase) || settings.assumeBookScriptsAreQuests)
                     {
                         Console.WriteLine($"{book.FormKey}: '{book.Name}' a un script de quête appelé '{script.Name}'.");
                         isBookQuestRealted = true;
