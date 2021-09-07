@@ -48,7 +48,7 @@ namespace BookSmart
         // Label Format
         public enum LabelFormat
         {
-            Étoile,
+            Étoiles,
             Court,
             Long
         }
