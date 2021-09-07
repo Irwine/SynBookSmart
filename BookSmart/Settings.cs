@@ -1,5 +1,4 @@
 using Mutagen.Bethesda.Synthesis.Settings;
-using Mutagen.Bethesda.FormKeys.SkyrimSE;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.WPF.Reflection.Attributes;
 using Noggog;
